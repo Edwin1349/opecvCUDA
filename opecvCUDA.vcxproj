@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{3edf040a-ed27-45f0-8ef3-f44127d452d6}</ProjectGuid>
+    <RootNamespace>opecvCUDA</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(OPENCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OPENCV_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_aruco452d.lib;opencv_bgsegm452d.lib;opencv_bioinspired452d.lib;opencv_calib3d452d.lib;opencv_ccalib452d.lib;opencv_core452d.lib;opencv_cudaarithm452d.lib;opencv_cudabgsegm452d.lib;opencv_cudacodec452d.lib;opencv_cudafeatures2d452d.lib;opencv_cudafilters452d.lib;opencv_cudaimgproc452d.lib;opencv_cudalegacy452d.lib;opencv_cudaobjdetect452d.lib;opencv_cudaoptflow452d.lib;opencv_cudastereo452d.lib;opencv_cudawarping452d.lib;opencv_cudev452d.lib;opencv_datasets452d.lib;opencv_dnn_objdetect452d.lib;opencv_dnn_superres452d.lib;opencv_dnn452d.lib;opencv_dpm452d.lib;opencv_face452d.lib;opencv_features2d452d.lib;opencv_flann452d.lib;opencv_fuzzy452d.lib;opencv_gapi452d.lib;opencv_hfs452d.lib;opencv_highgui452d.lib;opencv_img_hash452d.lib;opencv_imgcodecs452d.lib;opencv_imgproc452d.lib;opencv_intensity_transform452d.lib;opencv_line_descriptor452d.lib;opencv_mcc452d.lib;opencv_ml452d.lib;opencv_objdetect452d.lib;opencv_optflow452d.lib;opencv_phase_unwrapping452d.lib;opencv_photo452d.lib;opencv_plot452d.lib;opencv_quality452d.lib;opencv_rapid452d.lib;opencv_reg452d.lib;opencv_rgbd452d.lib;opencv_saliency452d.lib;opencv_shape452d.lib;opencv_stereo452d.lib;opencv_stitching452d.lib;opencv_structured_light452d.lib;opencv_superres452d.lib;opencv_surface_matching452d.lib;opencv_text452d.lib;opencv_tracking452d.lib;opencv_video452d.lib;opencv_videoio452d.lib;opencv_videostab452d.lib;opencv_wechat_qrcode452d.lib;opencv_xfeatures2d452d.lib;opencv_ximgproc452d.lib;opencv_xobjdetect452d.lib;opencv_xphoto452d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(OPENCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OPENCV_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_aruco452d.lib;opencv_bgsegm452d.lib;opencv_bioinspired452d.lib;opencv_calib3d452d.lib;opencv_ccalib452d.lib;opencv_core452d.lib;opencv_cudaarithm452d.lib;opencv_cudabgsegm452d.lib;opencv_cudacodec452d.lib;opencv_cudafeatures2d452d.lib;opencv_cudafilters452d.lib;opencv_cudaimgproc452d.lib;opencv_cudalegacy452d.lib;opencv_cudaobjdetect452d.lib;opencv_cudaoptflow452d.lib;opencv_cudastereo452d.lib;opencv_cudawarping452d.lib;opencv_cudev452d.lib;opencv_datasets452d.lib;opencv_dnn_objdetect452d.lib;opencv_dnn_superres452d.lib;opencv_dnn452d.lib;opencv_dpm452d.lib;opencv_face452d.lib;opencv_features2d452d.lib;opencv_flann452d.lib;opencv_fuzzy452d.lib;opencv_gapi452d.lib;opencv_hfs452d.lib;opencv_highgui452d.lib;opencv_img_hash452d.lib;opencv_imgcodecs452d.lib;opencv_imgproc452d.lib;opencv_intensity_transform452d.lib;opencv_line_descriptor452d.lib;opencv_mcc452d.lib;opencv_ml452d.lib;opencv_objdetect452d.lib;opencv_optflow452d.lib;opencv_phase_unwrapping452d.lib;opencv_photo452d.lib;opencv_plot452d.lib;opencv_quality452d.lib;opencv_rapid452d.lib;opencv_reg452d.lib;opencv_rgbd452d.lib;opencv_saliency452d.lib;opencv_shape452d.lib;opencv_stereo452d.lib;opencv_stitching452d.lib;opencv_structured_light452d.lib;opencv_superres452d.lib;opencv_surface_matching452d.lib;opencv_text452d.lib;opencv_tracking452d.lib;opencv_video452d.lib;opencv_videoio452d.lib;opencv_videostab452d.lib;opencv_wechat_qrcode452d.lib;opencv_xfeatures2d452d.lib;opencv_ximgproc452d.lib;opencv_xobjdetect452d.lib;opencv_xphoto452d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(OPENCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OPENCV_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_aruco452d.lib;opencv_bgsegm452d.lib;opencv_bioinspired452d.lib;opencv_calib3d452d.lib;opencv_ccalib452d.lib;opencv_core452d.lib;opencv_cudaarithm452d.lib;opencv_cudabgsegm452d.lib;opencv_cudacodec452d.lib;opencv_cudafeatures2d452d.lib;opencv_cudafilters452d.lib;opencv_cudaimgproc452d.lib;opencv_cudalegacy452d.lib;opencv_cudaobjdetect452d.lib;opencv_cudaoptflow452d.lib;opencv_cudastereo452d.lib;opencv_cudawarping452d.lib;opencv_cudev452d.lib;opencv_datasets452d.lib;opencv_dnn_objdetect452d.lib;opencv_dnn_superres452d.lib;opencv_dnn452d.lib;opencv_dpm452d.lib;opencv_face452d.lib;opencv_features2d452d.lib;opencv_flann452d.lib;opencv_fuzzy452d.lib;opencv_gapi452d.lib;opencv_hfs452d.lib;opencv_highgui452d.lib;opencv_img_hash452d.lib;opencv_imgcodecs452d.lib;opencv_imgproc452d.lib;opencv_intensity_transform452d.lib;opencv_line_descriptor452d.lib;opencv_mcc452d.lib;opencv_ml452d.lib;opencv_objdetect452d.lib;opencv_optflow452d.lib;opencv_phase_unwrapping452d.lib;opencv_photo452d.lib;opencv_plot452d.lib;opencv_quality452d.lib;opencv_rapid452d.lib;opencv_reg452d.lib;opencv_rgbd452d.lib;opencv_saliency452d.lib;opencv_shape452d.lib;opencv_stereo452d.lib;opencv_stitching452d.lib;opencv_structured_light452d.lib;opencv_superres452d.lib;opencv_surface_matching452d.lib;opencv_text452d.lib;opencv_tracking452d.lib;opencv_video452d.lib;opencv_videoio452d.lib;opencv_videostab452d.lib;opencv_wechat_qrcode452d.lib;opencv_xfeatures2d452d.lib;opencv_ximgproc452d.lib;opencv_xobjdetect452d.lib;opencv_xphoto452d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(OPENCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OPENCV_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_aruco452d.lib;opencv_bgsegm452d.lib;opencv_bioinspired452d.lib;opencv_calib3d452d.lib;opencv_ccalib452d.lib;opencv_core452d.lib;opencv_cudaarithm452d.lib;opencv_cudabgsegm452d.lib;opencv_cudacodec452d.lib;opencv_cudafeatures2d452d.lib;opencv_cudafilters452d.lib;opencv_cudaimgproc452d.lib;opencv_cudalegacy452d.lib;opencv_cudaobjdetect452d.lib;opencv_cudaoptflow452d.lib;opencv_cudastereo452d.lib;opencv_cudawarping452d.lib;opencv_cudev452d.lib;opencv_datasets452d.lib;opencv_dnn_objdetect452d.lib;opencv_dnn_superres452d.lib;opencv_dnn452d.lib;opencv_dpm452d.lib;opencv_face452d.lib;opencv_features2d452d.lib;opencv_flann452d.lib;opencv_fuzzy452d.lib;opencv_gapi452d.lib;opencv_hfs452d.lib;opencv_highgui452d.lib;opencv_img_hash452d.lib;opencv_imgcodecs452d.lib;opencv_imgproc452d.lib;opencv_intensity_transform452d.lib;opencv_line_descriptor452d.lib;opencv_mcc452d.lib;opencv_ml452d.lib;opencv_objdetect452d.lib;opencv_optflow452d.lib;opencv_phase_unwrapping452d.lib;opencv_photo452d.lib;opencv_plot452d.lib;opencv_quality452d.lib;opencv_rapid452d.lib;opencv_reg452d.lib;opencv_rgbd452d.lib;opencv_saliency452d.lib;opencv_shape452d.lib;opencv_stereo452d.lib;opencv_stitching452d.lib;opencv_structured_light452d.lib;opencv_superres452d.lib;opencv_surface_matching452d.lib;opencv_text452d.lib;opencv_tracking452d.lib;opencv_video452d.lib;opencv_videoio452d.lib;opencv_videostab452d.lib;opencv_wechat_qrcode452d.lib;opencv_xfeatures2d452d.lib;opencv_ximgproc452d.lib;opencv_xobjdetect452d.lib;opencv_xphoto452d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="DetectChars.cpp" />
+    <ClCompile Include="DetectPlates.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PossibleChar.cpp" />
+    <ClCompile Include="Preprocess.cpp" />
+    <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DetectChars.h" />
+    <ClInclude Include="DetectPlates.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="PossibleChar.h" />
+    <ClInclude Include="PossiblePlate.h" />
+    <ClInclude Include="Preprocess.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="classifications.xml" />
+    <Xml Include="images.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Cars1.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
