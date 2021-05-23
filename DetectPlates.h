@@ -9,12 +9,11 @@
 #include "PossiblePlate.h"
 #include "PossibleChar.h"
 #include "Preprocess.h"
-#include "DetectChars.h"
 
 const double PLATE_WIDTH_PADDING_FACTOR = 1.3;
 const double PLATE_HEIGHT_PADDING_FACTOR = 1.5;
 
-std::vector<PossiblePlate> detectPlatesInScene(cv::Mat& imgOriginalScene);
+std::vector<std::vector<PossiblePlate>> detectPlatesInScene(std::vector<cv::Mat>& imgOriginalScene);
 
 std::vector<PossibleChar> findPossibleCharsInScene(cv::Mat& imgThresh);
 

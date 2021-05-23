@@ -2,7 +2,6 @@
 #define POSSIBLE_PLATE_H
 
 #include <string>
-
 #include<opencv2/core/core.hpp>
 #include<opencv2/highgui/highgui.hpp>
 #include<opencv2/imgproc/imgproc.hpp>
@@ -20,6 +19,5 @@ public:
     static bool sortDescendingByNumberOfChars(const PossiblePlate& ppLeft, const PossiblePlate& ppRight) {
         return(ppLeft.strChars.length() > ppRight.strChars.length());
     }
-
 };
 #endif

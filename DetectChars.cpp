@@ -40,62 +40,77 @@ bool loadKNNDataAndTrainKNN(void) {
     return true;
 }
 
-std::vector<PossiblePlate> detectCharsInPlates(std::vector<PossiblePlate>& vectorOfPossiblePlates) {
-    int intPlateCounter = 0;				// this is only for showing steps
+std::vector<std::vector<PossiblePlate>> detectCharsInPlates(std::vector<std::vector<PossiblePlate>>& vectorOfPossiblePlates) {
     cv::Mat imgContours;
     std::vector<std::vector<cv::Point> > contours;
     cv::RNG rng;
+    std::vector<std::vector<cv::Mat>> imgPlate(vectorOfPossiblePlates.size()), imgGrayscale(vectorOfPossiblePlates.size()), imgThresh(vectorOfPossiblePlates.size());
 
-    if (vectorOfPossiblePlates.empty()) {               // if vector of possible plates is empty
-        return(vectorOfPossiblePlates);                 // return
-    }
-    // at this point we can be sure vector of possible plates has at least one plate
-
-    for (auto& possiblePlate : vectorOfPossiblePlates) {            // for each possible plate, this is a big for loop that takes up most of the function
-
-        preprocess(possiblePlate.imgPlate, possiblePlate.imgGrayscale, possiblePlate.imgThresh);        // preprocess to get grayscale and threshold images
-
-        // upscale size by 60% for better viewing and character recognition
-        cv::resize(possiblePlate.imgThresh, possiblePlate.imgThresh, cv::Size(), 1.6, 1.6);
-
-        // threshold again to eliminate any gray areas
-        cv::threshold(possiblePlate.imgThresh, possiblePlate.imgThresh, 0.0, 255.0, cv::THRESH_BINARY | cv::THRESH_OTSU);
-
-        // find all possible chars in the plate,
-        // this function first finds all contours, then only includes contours that could be chars (without comparison to other chars yet)
-        std::vector<PossibleChar> vectorOfPossibleCharsInPlate = findPossibleCharsInPlate(possiblePlate.imgGrayscale, possiblePlate.imgThresh);
-
-        // given a vector of all possible chars, find groups of matching chars within the plate
-        std::vector<std::vector<PossibleChar> > vectorOfVectorsOfMatchingCharsInPlate = findVectorOfVectorsOfMatchingChars(vectorOfPossibleCharsInPlate);
-
-        if (vectorOfVectorsOfMatchingCharsInPlate.size() == 0) {                // if no groups of matching chars were found in the plate
-            possiblePlate.strChars = "";            // set plate string member variable to empty string
-            continue;                               // go back to top of for loop
+    for (int i = 0; i < vectorOfPossiblePlates.size(); i++) {
+        if (vectorOfPossiblePlates[i].empty()) {               // if vector of possible plates is empty
+            //return(vectorOfPossiblePlates);                 // return
+            continue;
         }
-
-        for (auto& vectorOfMatchingChars : vectorOfVectorsOfMatchingCharsInPlate) {                                         // for each vector of matching chars in the current plate
-            std::sort(vectorOfMatchingChars.begin(), vectorOfMatchingChars.end(), PossibleChar::sortCharsLeftToRight);      // sort the chars left to right
-            vectorOfMatchingChars = removeInnerOverlappingChars(vectorOfMatchingChars);                                     // and eliminate any overlapping chars
-        }
-
-        // within each possible plate, suppose the longest vector of potential matching chars is the actual vector of chars
-        unsigned int intLenOfLongestVectorOfChars = 0;
-        unsigned int intIndexOfLongestVectorOfChars = 0;
-        // loop through all the vectors of matching chars, get the index of the one with the most chars
-        for (unsigned int i = 0; i < vectorOfVectorsOfMatchingCharsInPlate.size(); i++) {
-            if (vectorOfVectorsOfMatchingCharsInPlate[i].size() > intLenOfLongestVectorOfChars) {
-                intLenOfLongestVectorOfChars = vectorOfVectorsOfMatchingCharsInPlate[i].size();
-                intIndexOfLongestVectorOfChars = i;
+        else {
+            for (int j = 0; j < vectorOfPossiblePlates[i].size(); j++) {
+                imgPlate[i].push_back(vectorOfPossiblePlates[i][j].imgPlate);
+                imgGrayscale[i].push_back(vectorOfPossiblePlates[i][j].imgGrayscale);
+                imgThresh[i].push_back(vectorOfPossiblePlates[i][j].imgThresh);
             }
         }
-        // suppose that the longest vector of matching chars within the plate is the actual vector of chars
-        std::vector<PossibleChar> longestVectorOfMatchingCharsInPlate = vectorOfVectorsOfMatchingCharsInPlate[intIndexOfLongestVectorOfChars];
+    }
 
-        // perform char recognition on the longest vector of matching chars in the plate
-        possiblePlate.strChars = recognizeCharsInPlate(possiblePlate.imgThresh, longestVectorOfMatchingCharsInPlate);
+    for (int i = 0; i < vectorOfPossiblePlates.size(); i++) {
+    //for (auto& possiblePlate : vectorOfPossiblePlates) {            // for each possible plate, this is a big for loop that takes up most of the function
+        if (vectorOfPossiblePlates[i].size() == 0) {
+            continue;
+        }
+        else {
+            preprocess(imgPlate[i], imgGrayscale[i], imgThresh[i]);        // preprocess to get grayscale and threshold images
 
-    }   // end for each possible plate big for loop that takes up most of the function
+                                                                            // upscale size by 60% for better viewing and character recognition
 
+            for (int j = 0; j < vectorOfPossiblePlates[i].size(); j++) {
+                cv::resize(imgThresh[i][j], imgThresh[i][j], cv::Size(), 1.6, 1.6);
+
+                // threshold again to eliminate any gray areas
+                cv::threshold(imgThresh[i][j], imgThresh[i][j], 0.0, 255.0, cv::THRESH_BINARY | cv::THRESH_OTSU);
+
+                // find all possible chars in the plate,
+                // this function first finds all contours, then only includes contours that could be chars (without comparison to other chars yet)
+                std::vector<PossibleChar> vectorOfPossibleCharsInPlate = findPossibleCharsInPlate(imgGrayscale[i][j], imgThresh[i][j]);
+
+                // given a vector of all possible chars, find groups of matching chars within the plate
+                std::vector<std::vector<PossibleChar> > vectorOfVectorsOfMatchingCharsInPlate = findVectorOfVectorsOfMatchingChars(vectorOfPossibleCharsInPlate);
+
+                if (vectorOfVectorsOfMatchingCharsInPlate.size() == 0) {                // if no groups of matching chars were found in the plate
+                    vectorOfPossiblePlates[i][j].strChars = "";            // set plate string member variable to empty string
+                    continue;                               // go back to top of for loop
+                }
+
+                for (auto& vectorOfMatchingChars : vectorOfVectorsOfMatchingCharsInPlate) {                                         // for each vector of matching chars in the current plate
+                    std::sort(vectorOfMatchingChars.begin(), vectorOfMatchingChars.end(), PossibleChar::sortCharsLeftToRight);      // sort the chars left to right
+                    vectorOfMatchingChars = removeInnerOverlappingChars(vectorOfMatchingChars);                                     // and eliminate any overlapping chars
+                }
+
+                // within each possible plate, suppose the longest vector of potential matching chars is the actual vector of chars
+                unsigned int intLenOfLongestVectorOfChars = 0;
+                unsigned int intIndexOfLongestVectorOfChars = 0;
+                // loop through all the vectors of matching chars, get the index of the one with the most chars
+                for (unsigned int i = 0; i < vectorOfVectorsOfMatchingCharsInPlate.size(); i++) {
+                    if (vectorOfVectorsOfMatchingCharsInPlate[i].size() > intLenOfLongestVectorOfChars) {
+                        intLenOfLongestVectorOfChars = vectorOfVectorsOfMatchingCharsInPlate[i].size();
+                        intIndexOfLongestVectorOfChars = i;
+                    }
+                }
+                // suppose that the longest vector of matching chars within the plate is the actual vector of chars
+                std::vector<PossibleChar> longestVectorOfMatchingCharsInPlate = vectorOfVectorsOfMatchingCharsInPlate[intIndexOfLongestVectorOfChars];
+
+                // perform char recognition on the longest vector of matching chars in the plate
+                vectorOfPossiblePlates[i][j].strChars = recognizeCharsInPlate(imgThresh[i][j], longestVectorOfMatchingCharsInPlate);
+            }
+        }
+    }
     return(vectorOfPossiblePlates);
 }
 
