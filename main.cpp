@@ -30,8 +30,8 @@ int main(void) {
 
     extract_frames("Cars\\car1.avi", imgsOriginalScene);
 
-    imgsOriginalScene.clear();
-    imgsOriginalScene.push_back(cv::imread("Cars\\Cars1.png"));
+    //imgsOriginalScene.clear();
+    //imgsOriginalScene.push_back(cv::imread("Cars\\Cars1.png"));
 
     std::vector<std::vector<PossiblePlate>> vectorOfPossiblePlates = detectPlatesInScene(imgsOriginalScene);
     vectorOfPossiblePlates = detectCharsInPlates(vectorOfPossiblePlates);
@@ -40,6 +40,7 @@ int main(void) {
 
         if (vectorOfPossiblePlates[img].empty()) {
             //std::cout << std::endl << "no license plates were detected" << std::endl;
+            continue;
         }
 
         else {
@@ -49,7 +50,7 @@ int main(void) {
                 PossiblePlate a = vectorOfPossiblePlates[img].front();
 
                 cv::imshow("imgPlate", a.imgPlate);
-                //cv::imshow("imgThresh", a.imgThresh);
+                cv::imshow("imgThresh", a.imgThresh);
                 cv::imshow("imgOriginalScene", imgsOriginalScene[img]);
                 cv::waitKey(0);
                 if (a.strChars.length() == 0) {

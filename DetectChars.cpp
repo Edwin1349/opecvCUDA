@@ -108,6 +108,8 @@ std::vector<std::vector<PossiblePlate>> detectCharsInPlates(std::vector<std::vec
 
                 // perform char recognition on the longest vector of matching chars in the plate
                 vectorOfPossiblePlates[i][j].strChars = recognizeCharsInPlate(imgThresh[i][j], longestVectorOfMatchingCharsInPlate);
+                vectorOfPossiblePlates[i][j].imgGrayscale = imgGrayscale[i][j];
+                vectorOfPossiblePlates[i][j].imgThresh = imgThresh[i][j];
             }
         }
     }
