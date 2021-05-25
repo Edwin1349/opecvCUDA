@@ -1,7 +1,7 @@
 #ifndef MY_MAIN
 #define MY_MAIN
 
-#define VIDEO
+#define IMG
 
 #include<conio.h> 
 
