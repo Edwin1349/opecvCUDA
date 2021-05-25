@@ -1,6 +1,8 @@
 #ifndef MY_MAIN
 #define MY_MAIN
 
+#define VIDEO
+
 #include<conio.h> 
 
 #include "opencv2/opencv.hpp"

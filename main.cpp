@@ -28,10 +28,18 @@ int main(void) {
     bool blnKNNTrainingSuccessful = loadKNNDataAndTrainKNN();
     std::vector<cv::Mat> imgsOriginalScene;
 
-    extract_frames("Cars\\car1.avi", imgsOriginalScene);
+#ifdef IMG
+    std::vector<cv::String> fn;
+    cv::glob("Cars\\*.png", fn, false);
+    size_t count = fn.size(); {
+        for (size_t i = 0; i < count; i++)
+            imgsOriginalScene.push_back(cv::imread(fn[i]));
+    }
+#endif
 
-    //imgsOriginalScene.clear();
-    //imgsOriginalScene.push_back(cv::imread("Cars\\Cars1.png"));
+#ifdef VIDEO
+    extract_frames("Cars\\car1.avi", imgsOriginalScene);
+#endif
 
     std::vector<std::vector<PossiblePlate>> vectorOfPossiblePlates = detectPlatesInScene(imgsOriginalScene);
     vectorOfPossiblePlates = detectCharsInPlates(vectorOfPossiblePlates);
