@@ -9,22 +9,17 @@ std::vector<std::vector<PossiblePlate>> detectPlatesInScene(std::vector<cv::Mat>
     cv::RNG rng;
 
     cv::destroyAllWindows();
-    preprocess(imgOriginalScene, imgGrayscaleScene, imgThreshScene);
 
-  /*  for (int i = 0; i < imgOriginalScene.size(); i++) {
-        cv::imshow("imgOriginalScene", imgGrayscaleScene[i]);
-        cv::waitKey(0);
-    }*/
-    //cv::imshow("imgOriginalScene", imgGrayscaleScene[0]);
-    //cv::waitKey(0);
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    preprocess(imgOriginalScene, imgGrayscaleScene, imgThreshScene);
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    std::cout << "Plates preprocess time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << std::endl;
 
     for (int i = 0; i < imgOriginalScene.size(); i++) {
-        // find all possible chars in the scene,
-        // this function first finds all contours, then only includes contours that could be chars (without comparison to other chars yet)
         std::vector<PossibleChar> vectorOfPossibleCharsInScene = findPossibleCharsInScene(imgThreshScene[i]);
-        // given a vector of all possible chars, find groups of matching chars
-        // in the next steps each group of matching chars will attempt to be recognized as a plate
+
         std::vector<std::vector<PossibleChar> > vectorOfVectorsOfMatchingCharsInScene = findVectorOfVectorsOfMatchingChars(vectorOfPossibleCharsInScene);
+
         for (auto& vectorOfMatchingChars : vectorOfVectorsOfMatchingCharsInScene) {                     // for each group of matching chars
             PossiblePlate possiblePlate = extractPlate(imgOriginalScene[i], vectorOfMatchingChars);        // attempt to extract plate
             if (possiblePlate.imgPlate.empty() == false) {                                              // if plate was found

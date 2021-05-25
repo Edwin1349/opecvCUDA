@@ -60,6 +60,7 @@ std::vector<std::vector<PossiblePlate>> detectCharsInPlates(std::vector<std::vec
         }
     }
 
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     for (int i = 0; i < vectorOfPossiblePlates.size(); i++) {
     //for (auto& possiblePlate : vectorOfPossiblePlates) {            // for each possible plate, this is a big for loop that takes up most of the function
         if (vectorOfPossiblePlates[i].size() == 0) {
@@ -113,6 +114,8 @@ std::vector<std::vector<PossiblePlate>> detectCharsInPlates(std::vector<std::vec
             }
         }
     }
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    std::cout << "Chars preprocess time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << std::endl;
     return(vectorOfPossiblePlates);
 }
 

@@ -1,6 +1,6 @@
 #include "Preprocess.h"
 
-double max_time;
+//double max_time;
 
 void preprocess(std::vector<cv::Mat>& imgOriginal, std::vector<cv::Mat>& imgGrayscale, std::vector<cv::Mat>& imgThresh) {
     std::shared_ptr<std::vector<cv::cuda::Stream>> streamsArray = std::make_shared<std::vector<cv::cuda::Stream>>();
@@ -133,7 +133,7 @@ std::shared_ptr<std::vector<cv::cuda::GpuMat>> maximizeContrast(std::shared_ptr<
     cv::Ptr<cv::cuda::Filter>morph = cv::cuda::createMorphologyFilter(cv::MORPH_TOPHAT, (*imgTopHat)[0].type(), structuringElement);
     cv::Ptr < cv::cuda::Filter>morph2 = cv::cuda::createMorphologyFilter(cv::MORPH_BLACKHAT, (*imgBlackHat)[0].type(), structuringElement);
 
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    //std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     for (int i = 0; i < gpuSrcArray->size(); i++) {
 
         morph->apply((*gpuSrcArray)[i], (*imgTopHat)[i], (*streamsArray)[i % streamsArray->size()]);
@@ -143,9 +143,9 @@ std::shared_ptr<std::vector<cv::cuda::GpuMat>> maximizeContrast(std::shared_ptr<
         cv::cuda::subtract((*imgGrayscalePlusTopHat)[i], (*imgBlackHat)[i], (*imgGrayscalePlusTopHatMinusBlackHat)[i], cv::noArray(), -1, (*streamsArray)[i % streamsArray->size()]);
     }
 
-    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    /*std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     max_time += std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count();
-    std::cout << "Max time: " << max_time << std::endl;
+    std::cout << "Max time: " << max_time << std::endl;*/
     //std::cout << cv::getBuildInformation();
     for (int i = 0; i < (*streamsArray).size(); i++) {
         (*streamsArray)[i].waitForCompletion();

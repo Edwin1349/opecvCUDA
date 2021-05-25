@@ -46,23 +46,19 @@ int main(void) {
         else {
             std::sort(vectorOfPossiblePlates[img].begin(), vectorOfPossiblePlates[img].end(), PossiblePlate::sortDescendingByNumberOfChars);
 
-           // for (int i = 0; i < vectorOfPossiblePlates[img].size(); i++) {
-                PossiblePlate a = vectorOfPossiblePlates[img].front();
+            PossiblePlate a = vectorOfPossiblePlates[img].front();
 
-                cv::imshow("imgPlate", a.imgPlate);
-                cv::imshow("imgThresh", a.imgThresh);
-                cv::imshow("imgOriginalScene", imgsOriginalScene[img]);
-                cv::waitKey(0);
-                if (a.strChars.length() == 0) {
-                    //std::cout << std::endl << "no characters were detected" << std::endl << std::endl;
-                    continue;
-                }
+            cv::imshow("imgPlate", a.imgPlate);
+            cv::imshow("imgThresh", a.imgThresh);
+            cv::imshow("imgOriginalScene", imgsOriginalScene[img]);
+            cv::waitKey(0);
+            if (a.strChars.length() == 0) {
+                //std::cout << std::endl << "no characters were detected" << std::endl << std::endl;
+                continue;
+            }
 
-                std::cout << std::endl << "license plate read from image = " << a.strChars << std::endl;
-                std::cout << std::endl << "-----------------------------------------" << std::endl;
-
-                //cv::imshow("imgOriginalScene" + (i.strChars), i);
-            //}
+            std::cout << std::endl << "license plate read from image = " << a.strChars << std::endl;
+            std::cout << std::endl << "-----------------------------------------" << std::endl;
         }
     }
     cv::waitKey(0);
